@@ -6,27 +6,15 @@ Penn Club Review is both a REST API and a front-end interface that allows users 
 
 Use the package manager [pip](https://pip.pypa.io/en/stable/) to install the necessary packages
 
-```bash
-pip install flask
-pip install bson
-pip install pymongo
-pip install bcrypt
-pip install dns
-```
-
 ## Usage
-Run the following in the base directory to start the application:
 
-```bash
-python -m flask run
-```
 Use Postman or the terminal to make get/post requests to the API portion. Make sure that they are in JSON format. 
 
 For the /api/clubs post route, ensure that the JSON request has the "club_name" "tags" and "description" keys
 For the /api/clubs put route, ensure that the JSON request has the "original_name" "new_name" "new_tags and "new_desc" keys
 For the /api/favorite post route, ensure that the JSON request has the "username" and "club_name" tags
 
-Sign in with a sample user. Her username is "jen" and password is "jen" as well
+Sample user has username and password as "jen"
 
 ## Additional Information
 
