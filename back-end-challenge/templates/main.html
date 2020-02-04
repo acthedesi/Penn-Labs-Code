@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TennisLink</title>
+        <link rel = "stylesheet" href = "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+            <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+            </div>
+            <div class="mx-auto order-0">
+                <a class="navbar-brand mx-auto p-1" href="#">Penn Clubs Review</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+            <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+                <ul class="navbar-nav ml-auto">
+                    {% if username%}
+                    <li class="nav-item active nav-link">
+                        Signed in as {{username}}
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/add_club">add club</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout">Logout</a>
+                    </li>
+                    {%else%}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/register">Sign Up</a>
+                    </li>
+                    {%endif%}
+                </ul>
+            </div>
+        </nav>
+    </head>
+    <body>
+    <script type="text/javascript">
+        function reviewButton(name){
+            location.href = "/review/" + name;
+        }
+        function infoButton(name){
+            location.href = "/clubs/" + name;
+        }
+    </script>
+        <div class="jumbotron">
+            <h1 class="display-4">{{response}}</h1>
+            {% if username%}
+            <p class="lead">Explore over 200 clubs!</p>
+            {%else%}
+            <p class="lead">Login to see the clubs!</p>
+            {%endif%}
+        </div>
+        <div class="row">
+        {% for club in clubs %}
+         <div class="col-md-3 col-sm-6">
+            <div class = "club-box">
+                    <span class = "name">Name: <b>{{club["name"]}}</b></span><br>
+                    Tags:
+                    {% if club["tags"]%}
+                    {% for tag in club["tags"] %}
+                        <span class = "tag"> {{tag}} </span><br>
+                    {% endfor %}
+                    {% endif %}
+                    <span class = "desc">Description: {{club["description"]}}</span>
+            </div>
+            <div id = "button-container" class = "form-group row">
+                <form action="/clubs/{{club._id}}" method = "GET">
+                    <button class = "info-button">
+                     More info
+                    </button>
+                </form>
+                <button class = "review-button" id = "{{club._id}}" onclick = "reviewButton(this.id)">
+                   Add Review
+               </button>
+            </div>
+         </div>
+        {% endfor %}
+     </div>
+    </body>
+    <style>
+        body {
+            background-color: #AFC7CB;
+            background-size: cover;
+        }
+        .row{
+            display: flex; 
+            flex-wrap: wrap;
+            margin: 0 3% 2%;
+        }
+        .club-box{
+            max-width: 300px;
+            color: #EFEEEE;
+            max-height: 250px;
+            min-width: 20%;
+            padding: 20px 20px;
+            overflow: auto;
+            background-color: #1E7398;
+            border-radius: 15px;
+        }
+        #button-container{
+            padding: 3% 2% 2%;
+            text-align: center;
+        }
+    </style>
+</html>

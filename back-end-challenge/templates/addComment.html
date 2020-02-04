@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TennisLink</title>
+        <link rel = "stylesheet" href = "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+            <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+            </div>
+            <div class="mx-auto order-0">
+                <a class="navbar-brand mx-auto p-1" href="#">Penn Clubs Review</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+            <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+                <ul class="navbar-nav ml-auto">
+                    {% if username%}
+                    <li class="nav-item active nav-link">
+                        Signed in as {{username}}
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/add_club">add club</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout">Logout</a>
+                    </li>
+                    {%else%}
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/register">Sign Up</a>
+                    </li>
+                    {%endif%}
+                </ul>
+            </div>
+        </nav>
+    </head>
+    <body>
+      <div class="container">
+            <form class="form-horizontal" role="form" action = "/clubs/{{object_id}}" method = "POST">
+                <h2>Add your review for {{club_name}}</h2>
+                <div class="form-group purple-border">
+                    <label for = "review">Review:</label>
+                    <textarea class="form-control" name="review" rows="3" placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Submit Review</button>
+            </form> 
+        </div> 
+   </body>
+</html>
